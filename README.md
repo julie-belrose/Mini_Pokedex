@@ -1,69 +1,73 @@
-# React + TypeScript + Vite
+# TP1 - Construire le Minipokédex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Contexte
 
-Currently, two official plugins are available:
+Vous venez d’être embauchés par le Professeur Chen pour développer la première version d’un **Pokédex React**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+L’objectif est simple : permettre aux dresseurs de **chercher un Pokémon par son nom** dans une petite liste d’espèces disponibles.
 
-## Expanding the ESLint configuration
+Mais le Professeur Chen est exigeant :
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Le champ de recherche doit être **souvenu** entre deux sessions (grâce au `localStorage`).
+- Si l’application est rechargée, le dernier Pokémon recherché doit réapparaître dans l’input.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Consignes
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Dans `App` :
+    - Créez un état `searchTerm` initialisé depuis `localStorage` (ou `'Pikachu'` si rien n’est stocké).
+    - Créez une liste statique de Pokémon :
+
+        ```jsx
+        const pokemons = [
+          { name: 'Pikachu', type: 'Électrik' },
+          { name: 'Bulbizarre', type: 'Plante' },
+          { name: 'Salamèche', type: 'Feu' },
+          { name: 'Carapuce', type: 'Eau' },
+        ];
+        ```
+
+2. Ajoutez un composant `Search` :
+    - Input texte contrôlé par `searchTerm`.
+    - Appelle un **callback handler** passé par `App` pour mettre à jour le state.
+3. Dans `App`, filtrez la liste :
+    - Affichez uniquement les Pokémon dont le `name` contient le `searchTerm` (case-insensitive).
+    - Passez cette liste filtrée au composant `List`.
+4. Ajoutez un **useEffect** pour :
+    - Sauvegarder `searchTerm` dans `localStorage` à chaque changement.
+5. (Bonus) Créez un **custom hook** `useLocalStorageState(key, initialValue)` pour encapsuler cette logique et rendre le code plus propre.
+
+---
+
+## Résultat attendu
+
+Interface simple :
+
+```
+🔍 Rechercher un Pokémon : [Pikachu]
+
+Résultats :
+- Pikachu (Électrik)
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Si je tape `Carap`, le résultat devient :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+Résultats :
+- Carapuce (Eau)
+
+```
+
+Si je vide l’input et recharge la page → `Pikachu` revient automatiquement.
+
+---
+
+## Bonus
+
+- Ajoutez un second filtre par **type** (Plante, Feu, Eau…).
+- Ajoutez un état “No results” quand la liste filtrée est vide.
+- Ajoutez un bouton “Clear search” qui réinitialise l’input.
+
+---
