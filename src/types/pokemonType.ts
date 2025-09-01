@@ -1,1 +1,7 @@
-export type PokemonType = 'Électrik' | 'Plante' | 'Feu' | 'Eau';
+export enum PokemonType {
+    Electrik = 'Électrik',
+    Plante = 'Plante',
+    Feu = 'Feu',
+    Eau = 'Eau',
+}
+
