@@ -1,6 +1,6 @@
 interface SelectFilterProps<T extends string> {
   label: string;
-  options: T[];
+  options: readonly T[];
   value: T | null;
   onChange: (val: T | null) => void;
   allLabel?: string; 

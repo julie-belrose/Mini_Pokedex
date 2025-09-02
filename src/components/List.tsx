@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Pokemon } from '../types/pokemon';
-import { PokemonType } from '../types/pokemonType';
+import { type PokemonType } from '../types/pokemonType';
 import { EmptyState } from './EmptyState';
 
 interface ListProps {

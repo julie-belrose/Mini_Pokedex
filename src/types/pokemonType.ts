@@ -1,7 +1,3 @@
-export enum PokemonType {
-    Electrik = 'Électrik',
-    Plante = 'Plante',
-    Feu = 'Feu',
-    Eau = 'Eau',
-}
+export const POKEMON_TYPES = ['Électrik', 'Plante', 'Feu', 'Eau'] as const;
+export type PokemonType = typeof POKEMON_TYPES[number];
 
