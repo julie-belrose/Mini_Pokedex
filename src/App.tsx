@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useMemo, useState } from 'react';
+import { Search } from './components/Search';
+import { List } from './components/List';
+import { SelectFilter } from './components/Filter';
+import { pokemons } from './data/pokemons';
+import { useLocalStorageState } from './hook/useLocalStorageState';
+import { POKEMON_TYPES, type PokemonType } from './types/pokemonType';
+import type { Pokemon } from './types/pokemon';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [searchTerm, setSearchTerm] = useLocalStorageState('searchTerm', 'Pikachu');
+  const [selectedType, setSelectedType] = useState<PokemonType | null>(null);
+
+  //Use useMemo to avoid re-filtering the list on every render when the filters change
+  const filteredPokemons = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+    return pokemons.filter((pokemon: Pokemon) => {
+      const matchesName = query === '' ? true : pokemon.name.toLowerCase().includes(query);
+      const matchesType = selectedType ? pokemon.type === selectedType : true;
+      return matchesName && matchesType;
+    });
+  }, [searchTerm, selectedType]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="container">
+      <Search
+        id="search"
+        placeholder="Rechercher un pokémon…"
+        value={searchTerm}
+        onChange={setSearchTerm}
+        onClear={() => setSearchTerm('')}
+        autoFocus
+      />
+
+      <SelectFilter<PokemonType>
+        label="Type"
+        options={POKEMON_TYPES}
+        value={selectedType}
+        onChange={setSelectedType}
+        allLabel="Tous les types"
+      />
+
+      <List pokemons={filteredPokemons} onPokemonClick={(pokemon) => console.log('Choisi:', pokemon.name)} />
+    </main>
+  );
 }
 
-export default App
+export default App;
