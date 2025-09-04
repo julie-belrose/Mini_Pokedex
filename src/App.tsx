@@ -22,7 +22,7 @@ function App() {
   }, [searchTerm, selectedType]);
 
   return (
-    <main className="container">
+    <main className="">
       <Search
         id="search"
         placeholder="Rechercher un pokémon…"

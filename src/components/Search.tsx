@@ -20,8 +20,8 @@ export const Search: React.FC<SearchProps> = ({
   clearLabel = 'Reset search',
 }) => {
   return (
-    <div className="search-container">
-      {id && <label htmlFor={id} className="sr-only">Search</label>}
+    <div className="mx-auto flex max-w-sm items-center gap-x-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+      {id && <label htmlFor={id} className="mx-auto flex max-w-sm items-center gap-x-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">Search</label>}
       <input
         id={id}
         autoFocus={autoFocus}
