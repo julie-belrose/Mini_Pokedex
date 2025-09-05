@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Search } from './components/Search';
 import { List } from './components/List';
 import { SelectFilter } from './components/Filter';
-import { pokemons } from './data/pokemons';
+import { pokemons } from './data/pokemon';
 import { useLocalStorageState } from './hook/useLocalStorageState';
 import { POKEMON_TYPES, type PokemonType } from './types/pokemonType';
 import type { Pokemon } from './types/pokemon';
