@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Pokemon } from '../types/pokemon';
 import { type PokemonType } from '../types/pokemonType';
-import { EmptyState } from './EmptyState';
+import { EmptyState } from '../../../shared/components/EmptyState';
 
 interface ListProps {
   pokemons: Pokemon[];

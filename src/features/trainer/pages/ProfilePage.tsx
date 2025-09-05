@@ -1,4 +1,4 @@
-const ProfilePage = () => {
+function ProfilePage () {
   return (
     <div>
       <h1>Profile Page</h1>

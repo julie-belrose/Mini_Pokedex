@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { HomePage } from '../pages/HomePage';
-import { PokemonDetail } from '../pages/PokemonDetail';
-import { FavoritesPage } from '../pages/FavoritesPage';
-import { TeamPage } from '../pages/TeamPage';
-import { ProfilePage } from '../pages/ProfilePage';
-import { Layout } from '../components/Layout';
+import { HomePage } from '../features/pokemon/pages/HomePage';
+import { PokemonDetail } from '../features/pokemon/pages/PokemonDetail';
+import { FavoritesPage } from '../features/pokemon/pages/FavoritesPage';
+import { TeamPage } from '../features/trainer/pages/TeamPage';
+import { ProfilePage } from '../features/trainer/pages/ProfilePage';
+import { Layout } from '../shared/components/Layout';
 
 export const router = createBrowserRouter([
   {

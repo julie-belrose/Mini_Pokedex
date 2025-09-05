@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
-import { Search } from './components/Search';
-import { List } from './components/List';
-import { SelectFilter } from './components/Filter';
-import { pokemons } from './data/pokemon';
-import { useLocalStorageState } from './hook/useLocalStorageState';
-import { POKEMON_TYPES, type PokemonType } from './types/pokemonType';
-import type { Pokemon } from './types/pokemon';
+import { Search } from './shared/ui/Search';
+import { List } from './features/pokemon/components/List';
+import { SelectFilter } from './shared/ui/SelectFilter';
+import { pokemons } from './features/pokemon/data/pokemon';
+import { useLocalStorageState } from './shared/hook/useLocalStorageState';
+import { POKEMON_TYPES, type PokemonType } from './features/pokemon/types/pokemonType';
+import type { Pokemon } from './features/pokemon/types/pokemon';
 
 function App() {
   const [searchTerm, setSearchTerm] = useLocalStorageState('searchTerm', 'Pikachu');

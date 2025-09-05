@@ -1,5 +1,5 @@
 
-import { EmptyState } from '../components/EmptyState';
+import { EmptyState } from '../../../shared/components/EmptyState';
 
 export const FavoritesPage = () => {
   const favorites = [] as string[];
